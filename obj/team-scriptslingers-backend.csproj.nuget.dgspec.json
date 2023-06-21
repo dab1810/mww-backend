@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ilove\\Desktop\\Final Project\\team-scriptslingers-backend\\team-scriptslingers-backend.csproj": {}
+    "C:\\Users\\impes\\Desktop\\FinalProject\\team-scriptslingers-backend\\team-scriptslingers-backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ilove\\Desktop\\Final Project\\team-scriptslingers-backend\\team-scriptslingers-backend.csproj": {
+    "C:\\Users\\impes\\Desktop\\FinalProject\\team-scriptslingers-backend\\team-scriptslingers-backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ilove\\Desktop\\Final Project\\team-scriptslingers-backend\\team-scriptslingers-backend.csproj",
+        "projectUniqueName": "C:\\Users\\impes\\Desktop\\FinalProject\\team-scriptslingers-backend\\team-scriptslingers-backend.csproj",
         "projectName": "team-scriptslingers-backend",
-        "projectPath": "C:\\Users\\ilove\\Desktop\\Final Project\\team-scriptslingers-backend\\team-scriptslingers-backend.csproj",
-        "packagesPath": "C:\\Users\\ilove\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ilove\\Desktop\\Final Project\\team-scriptslingers-backend\\obj\\",
+        "projectPath": "C:\\Users\\impes\\Desktop\\FinalProject\\team-scriptslingers-backend\\team-scriptslingers-backend.csproj",
+        "packagesPath": "C:\\Users\\impes\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\impes\\Desktop\\FinalProject\\team-scriptslingers-backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ilove\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\impes\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.OpenApi": {
+              "target": "Package",
+              "version": "[1.2.3, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
@@ -62,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.410\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.405\\RuntimeIdentifierGraph.json"
         }
       }
     }
