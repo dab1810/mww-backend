@@ -5,38 +5,60 @@ namespace team_scriptslingers_backend.Repositories;
 
 public class EventRepository : IEventRepository
 {
+
+    private readonly EventDbContext _context;
+
+    public EventRepository(EventDbContext context){
+        _context = context;
+    }
+
     public Event CreateEvent(Event newEvent)
     {
-        throw new NotImplementedException();
+        _context.Event.Add(newEvent);
+        _context.SaveChanges();
+        return newEvent;
     }
 
     public void DeleteEvent(int id)
     {
-        throw new NotImplementedException();
+        var requestedEvent = _context.Event.Find(id);
+        if(requestedEvent != null){
+            _context.Event.Remove(requestedEvent);
+            _context.SaveChanges();
+        }
     }
 
     public Event EditEvent(Event newEvent)
     {
-        throw new NotImplementedException();
+        var originalEvent = _context.Event.Find(newEvent.eventId);
+        if (originalEvent != null){
+            originalEvent.eventTitle = newEvent.eventTitle;
+            originalEvent.description = newEvent.description;
+            originalEvent.location = newEvent.location;
+            originalEvent.hostName = newEvent.hostName;
+            originalEvent.attendeeList = newEvent.attendeeList;
+            originalEvent.eventTime = newEvent.eventTime;
+            originalEvent.isFinished = newEvent.isFinished;
+        }
     }
 
     public IEnumerable<Event> GetAllEvents()
     {
-        throw new NotImplementedException();
+        return _context.Event.ToList();
     }
 
     public Event GetAllFutureEvents()
     {
-        throw new NotImplementedException();
+        return _context.Event.Where(e => e.isFinished == true);
     }
 
     public Event GetEventById(Event id)
     {
-        throw new NotImplementedException();
+        return _context.Event.SingleOrDefault(c => c.eventId == id);
     }
 
     public Event GetEventsByMonth(int month, int year)
     {
-        throw new NotImplementedException();
+        return _context.Event.Where(e => e.eventTime.Month == month && e.eventTime.year == year);
     }
 }
