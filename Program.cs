@@ -1,6 +1,11 @@
+using team_scriptslingers_backend.Migrations;
+using team_scriptslingers_backend.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSqlite<EventDbContext>("Data Source=team_scriptslingers_backend.db");
+builder.Services.AddScoped<IEventRepository, EventRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
