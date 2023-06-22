@@ -14,23 +14,23 @@ public class EventRepository : IEventRepository
 
     public Event CreateEvent(Event newEvent)
     {
-        _context.Event.Add(newEvent);
+        _context.Events.Add(newEvent);
         _context.SaveChanges();
         return newEvent;
     }
 
     public void DeleteEvent(int id)
     {
-        var requestedEvent = _context.Event.Find(id);
+        var requestedEvent = _context.Events.Find(id);
         if(requestedEvent != null){
-            _context.Event.Remove(requestedEvent);
+            _context.Events.Remove(requestedEvent);
             _context.SaveChanges();
         }
     }
 
     public Event EditEvent(Event newEvent)
     {
-        var originalEvent = _context.Event.Find(newEvent.eventId);
+        var originalEvent = _context.Events.Find(newEvent.eventId);
         if (originalEvent != null){
             originalEvent.eventTitle = newEvent.eventTitle;
             originalEvent.description = newEvent.description;
@@ -40,25 +40,26 @@ public class EventRepository : IEventRepository
             originalEvent.eventTime = newEvent.eventTime;
             originalEvent.isFinished = newEvent.isFinished;
         }
+        return originalEvent;
     }
 
     public IEnumerable<Event> GetAllEvents()
     {
-        return _context.Event.ToList();
+        return _context.Events.ToList();
     }
 
-    public Event GetAllFutureEvents()
+    public IEnumerable<Event> GetAllFutureEvents()
     {
-        return _context.Event.Where(e => e.isFinished == true);
+        return _context.Events.Where(e => e.isFinished == false).ToList();
     }
 
-    public Event GetEventById(Event id)
+    public Event GetEventById(int id)
     {
-        return _context.Event.SingleOrDefault(c => c.eventId == id);
+        return _context.Events.SingleOrDefault(c => c.eventId == id);
     }
 
-    public Event GetEventsByMonth(int month, int year)
+    public IEnumerable<Event> GetEventsByMonth(int month, int year)
     {
-        return _context.Event.Where(e => e.eventTime.Month == month && e.eventTime.year == year);
+        return _context.Events.Where(e => e.eventTime.Month == month && e.eventTime.Year == year).ToList();
     }
 }
