@@ -39,6 +39,7 @@ public class EventRepository : IEventRepository
             originalEvent.attendeeList = newEvent.attendeeList;
             originalEvent.eventTime = newEvent.eventTime;
             originalEvent.isFinished = newEvent.isFinished;
+            _context.SaveChanges();
         }
         return originalEvent;
     }
@@ -58,7 +59,7 @@ public class EventRepository : IEventRepository
         return _context.Events.SingleOrDefault(c => c.eventId == id);
     }
 
-    public IEnumerable<Event> GetEventsByMonth(int month, int year)
+    public IEnumerable<Event> GetEventsByMonth(int year, int month)
     {
         return _context.Events.Where(e => e.eventTime.Month == month && e.eventTime.Year == year).ToList();
     }
