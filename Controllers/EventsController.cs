@@ -9,9 +9,9 @@ namespace team_scriptslingers_backend.Controllers;
 public class EventsController : ControllerBase
 {
     private readonly ILogger<EventsController> _logger;
-    private readonly IEventsRepository _eventsRepository;
+    private readonly IEventRepository _eventsRepository;
 
-    public EventsController(ILogger<EventsController> logger, IEventsRepository repository){
+    public EventsController(ILogger<EventsController> logger, IEventRepository repository){
         _logger = logger;
         _eventsRepository = repository;
     }
