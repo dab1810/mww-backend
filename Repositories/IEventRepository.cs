@@ -6,7 +6,7 @@ public interface IEventRepository{
     IEnumerable<Event> GetAllEvents();
     IEnumerable<Event> GetAllFutureEvents();
     Event GetEventById(int id);
-    IEnumerable<Event> GetEventsByMonth(int month, int year);
+    IEnumerable<Event> GetEventsByMonth(int year, int month);
     Event EditEvent(Event newEvent);
     Event CreateEvent(Event newEvent);
     void DeleteEvent(int id);
