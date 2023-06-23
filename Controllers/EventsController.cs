@@ -1,8 +1,8 @@
-using team-scriptslingers-backend.Models;
-using team_scriptslingers-backend.Repositories;
+using team_scriptslingers_backend.Models;
+using team_scriptslingers_backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-namespace team-scriptslingers-backend.Controllers;
+namespace team_scriptslingers_backend.Controllers;
 
 [ApiController]
 [Route("[controller]")]
