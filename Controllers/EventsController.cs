@@ -73,6 +73,7 @@ public class EventsController : ControllerBase
     }
 
     [HttpDelete]
+    [Route("{id:int}")]
     public ActionResult DeleteEvent(int id)
     {
         // Deletes event (admin action) and returns NoContent
