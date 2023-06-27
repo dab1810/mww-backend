@@ -12,6 +12,6 @@ public class User{
     public string? email { get; set; }
     [Required]
     public string? password { get; set; }
-    public string? isAdmin { get; set; }
-    public string? enrolledIn { get; set; }
+    public Boolean? isAdmin { get; set; }
+    public string[]? enrolledIn { get; set; }
 }
