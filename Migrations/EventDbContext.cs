@@ -6,6 +6,7 @@ namespace team_scriptslingers_backend.Migrations;
 public class EventDbContext : DbContext
 {
     public DbSet<Event> Events { get; set; }
+    public DbSet<User> Users { get; set; }
 
     public EventDbContext(DbContextOptions<EventDbContext> options)
     : base(options) { }
@@ -47,5 +48,14 @@ public class EventDbContext : DbContext
                 hostName = "Joseph"
             }
         );
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.userId);
+            entity.Property(e => e.email).IsRequired();
+            entity.HasIndex(x => x.email).IsUnique();
+            entity.Property(e => e.password).IsRequired();
+        });
+
     }
 }
