@@ -13,5 +13,6 @@ public class User{
     [Required]
     public string? password { get; set; }
     public Boolean? isAdmin { get; set; }
-    public string[]? enrolledIn { get; set; }
+    [JsonIgnore]
+    public string? enrolledIn { get; set; }
 }
