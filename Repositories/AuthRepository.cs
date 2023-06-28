@@ -55,8 +55,7 @@ public class AuthRepository : IAuthRepository
 
     public string SignIn(string email, string password)
     {
-        //var user = _context.Users.SingleOrDefault(x => x.email == email);
-        var user = new User(); // For temporary use until DbContext is completed
+        var user = _context.Users.SingleOrDefault(x => x.email == email);
         var verified = false;
 
         if (user != null) {
