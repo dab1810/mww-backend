@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
 using team_scriptslingers_backend.Migrations;
 using team_scriptslingers_backend.Models;
@@ -67,5 +68,19 @@ public class AuthRepository : IAuthRepository
         }
 
         return BuildToken(user);
+    }
+
+    public User UpdateUser(User user){
+        var originalUser = _context.Users.Find(user.userId);
+
+        if(originalUser != null){
+            originalUser.enrolledIn = user.enrolledIn;
+            _context.SaveChanges();
+        }
+        return originalUser;
+    }
+
+    public User GetUserById(int id){
+        return _context.Users.Find(id);
     }
 }

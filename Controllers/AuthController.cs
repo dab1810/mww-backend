@@ -48,5 +48,23 @@ public class AuthController : ControllerBase{
         return Ok(token);
     }
 
+    [HttpGet]
+    [Route("get-user/{id:int}")]
+    public ActionResult<User> GetUserById(int id){
+        return _authService.GetUserById(id);
+    }
+
+    [HttpPut]
+    [Route("sign-up")]
+    public ActionResult<User> EventSignUp(User updatedUser){
+        if (updatedUser == null || !ModelState.IsValid){
+            return BadRequest();
+        }
+
+        var user = _authService.GetUserById(updatedUser.userId);
+
+        return Ok(_authService.UpdateUser(user));
+    }
+    
 
 }
