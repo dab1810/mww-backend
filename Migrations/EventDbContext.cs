@@ -19,10 +19,10 @@ public class EventDbContext : DbContext
             entity.Property(e => e.eventTitle);
             entity.Property(e => e.description);
             entity.Property(e => e.location);
-            entity.Property(e => e.hostName);
-            entity.Property(e => e.attendeeList);
+            // entity.Property(e => e.hostName);
+            // entity.Property(e => e.attendeeList);
             entity.Property(e => e.eventTime);
-            entity.Property(e => e.isFinished);
+            // entity.Property(e => e.isFinished);
         });
 
         modelBuilder.Entity<Event>().HasData(
