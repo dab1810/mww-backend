@@ -1,6 +1,8 @@
 using team_scriptslingers_backend.Models;
 using team_scriptslingers_backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace team_scriptslingers_backend.Controllers;
 
@@ -52,6 +54,7 @@ public class EventsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public ActionResult<Event> CreateEvent(Event newEvent)
     {
         // Checks to make sure the newEvent model is valid and not null, then creates and returns the new event
@@ -63,6 +66,7 @@ public class EventsController : ControllerBase
     }
 
     [HttpPut]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public ActionResult<Event> EditEvent(Event newEvent)
     {
         // Checks to make sure the newEvent model is valid and not null, then edits and returns the event
@@ -74,6 +78,7 @@ public class EventsController : ControllerBase
 
     [HttpDelete]
     [Route("{id:int}")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public ActionResult DeleteEvent(int id)
     {
         // Deletes event (admin action) and returns NoContent
