@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using team_scriptslingers_backend.Migrations;
 
@@ -10,9 +11,11 @@ using team_scriptslingers_backend.Migrations;
 namespace team_scriptslingers_backend.Migrations
 {
     [DbContext(typeof(EventDbContext))]
-    partial class EventDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230704023634_updatedcommentRelationship")]
+    partial class updatedcommentRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
@@ -23,21 +26,21 @@ namespace team_scriptslingers_backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("commentContent")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("PostId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("commenter")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("postId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("content")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("postedAt")
                         .HasColumnType("TEXT");
 
                     b.HasKey("commentId");
 
-                    b.HasIndex("postId");
+                    b.HasIndex("PostId");
 
                     b.ToTable("Comments");
                 });
@@ -109,10 +112,10 @@ namespace team_scriptslingers_backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("hostName")
+                    b.Property<string>("content")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("postContent")
+                    b.Property<string>("hostName")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("postedAt")
@@ -159,18 +162,18 @@ namespace team_scriptslingers_backend.Migrations
 
             modelBuilder.Entity("team_scriptslingers_backend.Models.Comment", b =>
                 {
-                    b.HasOne("team_scriptslingers_backend.Models.Post", "postContent")
-                        .WithMany("commentContent")
-                        .HasForeignKey("postId")
+                    b.HasOne("team_scriptslingers_backend.Models.Post", "Post")
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("postContent");
+                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("team_scriptslingers_backend.Models.Post", b =>
                 {
-                    b.Navigation("commentContent");
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }
