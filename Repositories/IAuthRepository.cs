@@ -9,4 +9,5 @@ public interface IAuthRepository
     string SignIn(string email, string password);
     User GetUserById(int id);
     User UpdateUser(User user);
+    IEnumerable<User> GetAllUsers();
 }

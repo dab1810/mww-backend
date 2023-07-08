@@ -59,6 +59,12 @@ public class AuthController : ControllerBase{
 
         return Ok(_authService.UpdateUser(user));
     }
+
+  [HttpGet]
+    public ActionResult<IEnumerable<User>> GetAllUsers(){
+        return Ok(_authService.GetAllUsers());
+    }
+    
     
 
 }
