@@ -8,4 +8,5 @@ public class Post {
     public string? hostName { get; set; }
     public string? postContent { get; set; }
     public DateTime postedAt { get; set; }
+    public ICollection<Comment>? comments { get; set;}
 }

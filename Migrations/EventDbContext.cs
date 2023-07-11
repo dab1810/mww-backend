@@ -54,6 +54,8 @@ public class EventDbContext : DbContext
             entity.Property(e => e.email).IsRequired();
             entity.HasIndex(x => x.email).IsUnique();
             entity.Property(e => e.password).IsRequired();
+            entity.Property(e => e.firstName).IsRequired();
+            entity.Property(e => e.lastName).IsRequired();
         });
 
         modelBuilder.Entity<Post>(entity =>
@@ -71,8 +73,8 @@ public class EventDbContext : DbContext
             entity.Property(e => e.commenter);
             entity.Property(e => e.postedAt);
             //configuring the relationship with the post it is commenting on. 
-            entity.HasOne(e => e.postContent)
-              .WithMany(p => p.commentContent)
+            entity.HasOne(e => e.post)
+              .WithMany(p => p.comments)
               .HasForeignKey(e => e.postId);
         });
 
