@@ -8,6 +8,6 @@ public class Comment {
         // Foreign key to associate the comment with a post
         public int postId { get; set; }
         // Navigation property for the associated post
-        public Post? postContent { get; set; }
+        public Post? post { get; set; }
 
 }
