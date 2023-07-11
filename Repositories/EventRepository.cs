@@ -1,3 +1,4 @@
+using SQLitePCL;
 using team_scriptslingers_backend.Migrations;
 using team_scriptslingers_backend.Models;
 
@@ -51,7 +52,7 @@ public class EventRepository : IEventRepository
 
     public IEnumerable<Event> GetAllFutureEvents()
     {
-        return _context.Events.Where(e => e.isFinished == false).ToList();
+        return _context.Events.Where(e => e.isFinished == false).OrderBy(e => e.eventTime).ToList();
     }
 
     public Event GetEventById(int id)
