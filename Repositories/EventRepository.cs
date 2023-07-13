@@ -52,7 +52,8 @@ public class EventRepository : IEventRepository
 
     public IEnumerable<Event> GetAllFutureEvents()
     {
-        return _context.Events.Where(e => e.isFinished == false).OrderBy(e => e.eventTime).ToList();
+        return _context.Events.Where(e => e.eventTime > DateTime.Now).ToList();
+        //return _context.Events.Where(e => e.isFinished == false).OrderBy(e => e.eventTime).ToList();
     }
 
     public Event GetEventById(int id)
