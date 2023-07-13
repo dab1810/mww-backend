@@ -66,6 +66,7 @@ public class EventsController : ControllerBase
     }
 
     [HttpPut]
+    [Route("{eventId:int}")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public ActionResult<Event> EditEvent(Event newEvent)
     {
