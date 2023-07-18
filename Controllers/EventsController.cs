@@ -77,6 +77,15 @@ public class EventsController : ControllerBase
         return Ok(_eventsRepository.EditEvent(newEvent));
     }
 
+    [HttpPut]
+    [Route("attendee-update")]
+    public ActionResult<Event> UpdateAttendeeList(Event newEvent){
+        if(!ModelState.IsValid || newEvent == null){
+            return BadRequest();
+        }
+        return Ok(_eventsRepository.UpdateAttendeeList(newEvent));
+    }
+
     [HttpDelete]
     [Route("{id:int}")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

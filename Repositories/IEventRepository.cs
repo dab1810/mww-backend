@@ -10,4 +10,5 @@ public interface IEventRepository{
     Event EditEvent(Event newEvent);
     Event CreateEvent(Event newEvent);
     void DeleteEvent(int id);
+    Event UpdateAttendeeList(Event newEvent);
 }
