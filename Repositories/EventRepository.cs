@@ -45,6 +45,15 @@ public class EventRepository : IEventRepository
         return originalEvent;
     }
 
+    public Event UpdateAttendeeList(Event newEvent){
+        var originalEvent = _context.Events.Find(newEvent.eventId);
+        if (originalEvent != null){
+            originalEvent.attendeeList = newEvent.attendeeList;
+            _context.SaveChanges();
+        }
+        return originalEvent;
+    }
+
     public IEnumerable<Event> GetAllEvents()
     {
         return _context.Events.ToList();
