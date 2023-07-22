@@ -53,11 +53,6 @@ public class EventRepository : IEventRepository
         return originalEvent;
     }
 
-    public IEnumerable<Event> GetAllEvents()
-    {
-        return _context.Events.ToList();
-    }
-
     public IEnumerable<Event> GetAllFutureEvents()
     {
         return _context.Events.Where(e => e.eventTime > DateTime.Now).OrderBy(e => e.eventTime).ToList();

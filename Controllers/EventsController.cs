@@ -19,14 +19,6 @@ public class EventsController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Event>> GetAllEvents()
-    {
-        // returns a full list of events (this route is for testing purposes, in the future the default get route will be GetFutureEvents())
-        return Ok(_eventsRepository.GetAllEvents());
-    }
-
-    [HttpGet]
-    [Route("future-events")]
     public ActionResult<IEnumerable<Event>> GetFutureEvents()
     {
         // returns all events where the "isFinished" property is set to false, signifying it hasn't happened yet
