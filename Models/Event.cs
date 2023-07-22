@@ -12,5 +12,4 @@ public class Event {
     public string? hostName { get; set; }
     public string? attendeeList { get; set; }
     public DateTime eventTime { get; set; }
-    public Boolean isFinished { get; set; }
 }
