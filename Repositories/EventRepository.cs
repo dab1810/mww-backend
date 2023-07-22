@@ -39,7 +39,6 @@ public class EventRepository : IEventRepository
             originalEvent.hostName = newEvent.hostName;
             originalEvent.attendeeList = newEvent.attendeeList;
             originalEvent.eventTime = newEvent.eventTime;
-            originalEvent.isFinished = newEvent.isFinished;
             _context.SaveChanges();
         }
         return originalEvent;
@@ -52,11 +51,6 @@ public class EventRepository : IEventRepository
             _context.SaveChanges();
         }
         return originalEvent;
-    }
-
-    public IEnumerable<Event> GetAllEvents()
-    {
-        return _context.Events.ToList();
     }
 
     public IEnumerable<Event> GetAllFutureEvents()
