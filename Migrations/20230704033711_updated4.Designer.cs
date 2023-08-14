@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using team_scriptslingers_backend.Migrations;
 
@@ -10,9 +11,11 @@ using team_scriptslingers_backend.Migrations;
 namespace team_scriptslingers_backend.Migrations
 {
     [DbContext(typeof(EventDbContext))]
-    partial class EventDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230704033711_updated4")]
+    partial class updated4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
@@ -63,6 +66,9 @@ namespace team_scriptslingers_backend.Migrations
                     b.Property<string>("hostName")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("isFinished")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("location")
                         .HasColumnType("TEXT");
 
@@ -77,7 +83,8 @@ namespace team_scriptslingers_backend.Migrations
                             description = "This is the first scheduled event on the database",
                             eventTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             eventTitle = "Event number ONE",
-                            hostName = "David"
+                            hostName = "David",
+                            isFinished = false
                         },
                         new
                         {
@@ -85,7 +92,8 @@ namespace team_scriptslingers_backend.Migrations
                             description = "This is the SECOND scheduled event on the database",
                             eventTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             eventTitle = "Event number TWO",
-                            hostName = "Marina"
+                            hostName = "Marina",
+                            isFinished = false
                         },
                         new
                         {
@@ -93,7 +101,8 @@ namespace team_scriptslingers_backend.Migrations
                             description = "This is the THIRD scheduled event on the database",
                             eventTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             eventTitle = "Event number THREE",
-                            hostName = "Joseph"
+                            hostName = "Joseph",
+                            isFinished = false
                         });
                 });
 
@@ -131,14 +140,12 @@ namespace team_scriptslingers_backend.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("firstName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool?>("isAdmin")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("lastName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("password")
@@ -155,18 +162,18 @@ namespace team_scriptslingers_backend.Migrations
 
             modelBuilder.Entity("team_scriptslingers_backend.Models.Comment", b =>
                 {
-                    b.HasOne("team_scriptslingers_backend.Models.Post", "post")
-                        .WithMany("comments")
+                    b.HasOne("team_scriptslingers_backend.Models.Post", "postContent")
+                        .WithMany("commentContent")
                         .HasForeignKey("postId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("post");
+                    b.Navigation("postContent");
                 });
 
             modelBuilder.Entity("team_scriptslingers_backend.Models.Post", b =>
                 {
-                    b.Navigation("comments");
+                    b.Navigation("commentContent");
                 });
 #pragma warning restore 612, 618
         }

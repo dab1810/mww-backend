@@ -48,5 +48,57 @@ public class AuthController : ControllerBase{
         return Ok(token);
     }
 
+    [HttpPut]
+    [Route("sign-up")]
+    public ActionResult<User> EventSignUp(User updatedUser){
+        if (updatedUser == null || !ModelState.IsValid){
+            return BadRequest();
+        }
+
+        var user = _authService.GetUserById(updatedUser.userId);
+
+        return Ok(_authService.UpdateUser(user));
+    }
+
+  [HttpGet]
+    public ActionResult<IEnumerable<User>> GetAllUsers(){
+        return Ok(_authService.GetAllUsers());
+    }
+    
+        [HttpPut]
+        [Route("{userId:int}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public ActionResult<User> UpdateUser(int userId, User user)
+        {
+            var existingUser = _authService.GetUserById(userId);
+
+            if(existingUser == null) {
+                return NotFound();
+            }
+
+            if(user == null){
+                return BadRequest();
+            }
+
+            if(!ModelState.IsValid || user == null){
+                return BadRequest();
+            }
+
+           var UserName = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+
+               if (UserName == null){
+                    return Unauthorized();
+               }
+            existingUser.userId = existingUser.userId;
+            existingUser.firstName = user.firstName;
+            existingUser.lastName = user.lastName;
+            existingUser.email = user.email;
+            existingUser.isAdmin = user.isAdmin;
+            existingUser.password = existingUser.password;
+
+            
+            return Ok(_authService.UpdateUser(existingUser)
+            );
+        }
 
 }

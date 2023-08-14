@@ -1,11 +1,13 @@
 using team_scriptslingers_backend.Models;
 using team_scriptslingers_backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace team_scriptslingers_backend.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class EventsController : ControllerBase
 {
     private readonly ILogger<EventsController> _logger;
@@ -17,14 +19,6 @@ public class EventsController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Event>> GetAllEvents()
-    {
-        // returns a full list of events (this route is for testing purposes, in the future the default get route will be GetFutureEvents())
-        return Ok(_eventsRepository.GetAllEvents());
-    }
-
-    [HttpGet]
-    [Route("future-events")]
     public ActionResult<IEnumerable<Event>> GetFutureEvents()
     {
         // returns all events where the "isFinished" property is set to false, signifying it hasn't happened yet
@@ -52,6 +46,7 @@ public class EventsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public ActionResult<Event> CreateEvent(Event newEvent)
     {
         // Checks to make sure the newEvent model is valid and not null, then creates and returns the new event
@@ -63,6 +58,8 @@ public class EventsController : ControllerBase
     }
 
     [HttpPut]
+    [Route("{eventId:int}")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public ActionResult<Event> EditEvent(Event newEvent)
     {
         // Checks to make sure the newEvent model is valid and not null, then edits and returns the event
@@ -72,8 +69,18 @@ public class EventsController : ControllerBase
         return Ok(_eventsRepository.EditEvent(newEvent));
     }
 
+    [HttpPut]
+    [Route("attendee-update")]
+    public ActionResult<Event> UpdateAttendeeList(Event newEvent){
+        if(!ModelState.IsValid || newEvent == null){
+            return BadRequest();
+        }
+        return Ok(_eventsRepository.UpdateAttendeeList(newEvent));
+    }
+
     [HttpDelete]
     [Route("{id:int}")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public ActionResult DeleteEvent(int id)
     {
         // Deletes event (admin action) and returns NoContent
